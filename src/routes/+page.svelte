@@ -20,6 +20,7 @@
 	scad_file.then(mod => {
 		console.log(mod.default);
 		({params, title} = extract_params(mod.default));
+		document.title = title;
 		if (browser && location.search) {
 				values = JSON.parse(decodeURIComponent(location.search.substring(1)));
 				console.log(values)
