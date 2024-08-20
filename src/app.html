@@ -4,6 +4,44 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+	    :root {
+        --material-accent-color: #d56217;
+        --icon-secondary-col: darkslategrey;
+            --material-background-color: white;
+        --material-background-important: rgba(255, 255, 255, 0.5);
+        --material-error-color: red;
+        color: darkslategrey;
+        --icon-col: darkslategrey;
+        --material-ambient-color: darkslategrey;
+        --material-accent-color-light-transparent: #eaa256;
+        --material-accent-color-text: white;
+        --material-accent-color-light: #e38932;
+        --material-text: darkslategrey;
+    }
+
+    html {
+        background: #fcf2e7;
+            font-family: sans-serif;
+    }
+
+    .ripple {
+        position: absolute;
+        transform: scale(0);
+        pointer-events: none;
+        width: 50px;
+        height: 50px;
+        transition: transform 1000ms, opacity 1000ms;
+        background: var(--material-accent-color-light-transparent);
+        border-radius: 50%;
+    }
+
+    .material-ripple-active {
+        transform: scale(2);
+        opacity: 0.5;
+    }
+
+</style>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
