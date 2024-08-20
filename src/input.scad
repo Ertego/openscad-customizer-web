@@ -1,10 +1,11 @@
-// size in the x direction in mm
+/* [Title Spike STL Creator] */
+// size in the x direction in mm icon:arrow-left-right
 size_x = 35; // .1
-// size in the y direction in mm
+// size in the y direction in mm icon:arrow-up-down
 size_y = 35; // .1
-// Space between the spikes, lower = less space between spikes
+// Space between the spikes, lower = less space between spikes icon:dots-grid
 density = 7.001; // [0:0.001:30] 
-// factor, just try until it fits
+// factor, just try until it fits icon:triangle
 pointyness = 6; // [30]
 // use a high value for cones
 spike_sides = 3; // [50]
@@ -17,6 +18,7 @@ spike_base_xy = 4; // .1
 random = false;
 // radius around 1, result is factor
 random_factor_r = .3; // .01
+/* [Hidden] */
 // makes halfed spikes start at the edges, best explained by trying
 weird_edges = true; 
 

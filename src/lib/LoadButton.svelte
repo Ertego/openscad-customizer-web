@@ -14,11 +14,12 @@
     export let margin = false;
     export let noNewLine = false;
     export let smallLink = false;
+    export let disabled = false;
     let loading = false;
     export let label = null;
 
     function click() {
-        if (loading) return;
+        if (loading || disabled) return;
         dispatch('clicked', {waitUntil: s => {
             loading = true;
             s.then(() => {
@@ -37,6 +38,6 @@
     }
 </script>
 
-<Button on:click={click} smallLink={smallLink} icon={icon} icon_color={icon_color} positive={positive} destroy={destroy} vertical={vertical} passive={passive} grow={grow} margin={margin} noNewLine={noNewLine} loading={loading} label={label}>
+<Button on:click={click} disabled={disabled} smallLink={smallLink} icon={icon} icon_color={icon_color} positive={positive} destroy={destroy} vertical={vertical} passive={passive} grow={grow} margin={margin} noNewLine={noNewLine} loading={loading} label={label}>
     <slot/>
 </Button>

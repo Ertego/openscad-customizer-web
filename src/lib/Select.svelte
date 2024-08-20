@@ -157,7 +157,9 @@
 <svelte:window on:click|capture={click} on:keydown={keydown}/>
 
 <div class="select_root" class:focused={focused || opened} on:click|capture|preventDefault={event => {opened = !opened; event.stopPropagation()}}>
-    <div class="flex flex-align-items-center" style="height: 100%" aria-hidden="true">
+    <div class="flex flex-align-items-center" style="height: 100%; display: flex;
+    align-items: center;
+    padding-left: 5px;" aria-hidden="true">
         {#if icon}
             <div class="flex flex-align-items-center" style="margin: 0 3px">
                 <Icon {icon} color={focused? "var(--material-accent-color)": "var(--icon-secondary-col)"}/>

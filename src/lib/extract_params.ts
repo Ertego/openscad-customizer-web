@@ -1,13 +1,22 @@
 export function extract_params(code: string) {
 	let last_description;
-	let results: Record<string, {default: any, type?: "bool"|"number", step:number, min?: number, max?:number, choices?: [any, string][], description?: string}> = {}
+	let title;
+	let hide_next = false;
+	let results: Record<string, {default: any, type?: "bool"|"number", step:number, min?: number, max?:number, choices?: [any, string][], description?: string, icon?: string}> = {}
 	for (const line of code.split("\n")) {
 		let match;
-		if (match = line.match(/^\/\/ ?(.+)/)) {
+		if (line.match(/^\/\* *\[[Hh]idden\] *\*\/ *$/)) hide_next = true;
+		else if (match = line.match(/^\/\* ?\[[tT]itle (.*) ?\] *\*\/ *$/)) {
+			title = match[1];
+		}
+		else if (match = line.match(/^\/\/ ?(.+)/)) {
 			last_description = match[1];
 		}
 		else if (match = line.match(/^(?<name>\w+) ?= ?(?<default>\w+|[\.0-9]+);?(?<i> ?\/\/ ?(?<i2>\[(?<range>.+?)\]|(?<step>[\.0-9]*)))? ?$/)) {
-			console.log(match);
+			if (hide_next) {
+				hide_next = false;
+				continue;
+			}
 			let type: "number" | "bool" | undefined;
 			let step, min, max, choices;
 			if (match!.groups!.default.match(/^[0-9\.]+$/)) {
@@ -34,9 +43,14 @@ export function extract_params(code: string) {
 				}
 			}
 
+			let icon;
+			let icon_match = last_description?.match(/.*icon:([\w-_]+)/);
+			if (icon_match) icon = icon_match[1];
+
 			results[match!.groups!.name] = 
 				{
-					description: last_description, 
+					description: last_description?.replace(/icon:[\w-_]+/, ""), 
+					icon,
 					default: match!.groups!.default,
 					type,
 					step: step ?? Number.parseFloat(match!.groups!.step),
@@ -47,5 +61,6 @@ export function extract_params(code: string) {
 			;
 		}
 	}
-	return results;
+	console.log(results);
+	return {params: results, title};
 }
