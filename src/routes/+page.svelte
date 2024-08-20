@@ -159,17 +159,20 @@ let dl;
 	<div bind:this={stlcont} id="stl_cont" style="height: 400px"></div>
 
 	<div style="display: flex; flex-direction: column; gap:5px">
-	{#if dl_url}
-		<div transition:slide>
-		<Button icon="download" on:click={() => dl.click()}>Download STL</Button>
-		</div>
+		{#if dl_url}
+			<div transition:slide>
+				<Button icon="download" on:click={() => dl.click()}>Download STL</Button>
+			</div>
 			<a bind:this={dl} style="display:none" href={dl_url} download="spike.stl">Download file</a>
-	{/if}
-		<Button icon="share" on:click={() => navigator.share({url: location.href})}>Share</Button>
+		{/if}
+		{#if browser && navigator.share}
+			<Button icon="share" on:click={() => navigator.share({url: location.href})}>Share</Button>
+		{/if}
+
 
 		<Button icon="reload-alert" on:click={() => location.search=''}>Reset to defaults</Button>
-			</div>
-			
+	</div>
+
 	<p>Generated using <a href="https://github.com/Ertego/openscad-customizer-web" target="_blank">OpenSCAD Web Customizer</a></p>
 
 </div>
